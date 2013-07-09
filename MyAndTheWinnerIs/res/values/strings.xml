@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">And The Winner Is</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Concours Nexus par Android2EE</string>
+    <string name="btn_start_draw">Let\'s draw !</string>
+    <string name="the_winner_is">Le gagnant est :</string>
+    <string name="the_device_is">Le Nexus est :</string>
+
+</resources>
