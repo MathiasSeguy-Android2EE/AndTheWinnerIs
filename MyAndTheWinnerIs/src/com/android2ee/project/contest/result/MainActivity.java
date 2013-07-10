@@ -17,7 +17,6 @@ import android.graphics.Paint.Align;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.nfc.NfcAdapter.CreateBeamUrisCallback;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -98,7 +97,6 @@ public class MainActivity extends Activity {
 	}
 
 	private void launchDraw() {
-		deviceAnimDuration = 300;
 		initializeNexusDrawable();
 		initializeParticipantsDrawable();
 		btnLaunchDraw.setVisibility(View.GONE);
@@ -125,7 +123,7 @@ public class MainActivity extends Activity {
 	/**
 	 * The duration for the device animation
 	 */
-	int deviceAnimDuration = 100;
+	int deviceAnimDuration = 300;
 	/**
 	 * The duration for the participants animation
 	 */
@@ -203,7 +201,7 @@ public class MainActivity extends Activity {
 				// Manage your thread's life cycle using the AtomicBooleans
 				while (count < loopsNumber[0]) {
 					// Make a pause or something like that
-					Thread.sleep(2000);
+					Thread.sleep(deviceAnimDuration*6);
 					// increment the counter
 					count++;
 					publishProgress(count);
@@ -219,8 +217,8 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onProgressUpdate(Integer... diff) {
 			int count = diff[0];
-			deviceAnimDuration = deviceAnimDuration + count * 50;
-			participantsAnimDuration = participantsAnimDuration + count * 30;
+			deviceAnimDuration = 300 + count * 50;
+			participantsAnimDuration = 90 + count * 30;
 			initializeNexusDrawable();
 			initializeParticipantsDrawable();
 		}
@@ -446,7 +444,7 @@ public class MainActivity extends Activity {
 			// tell ObjectAnimator to automatically animate the target object for us, so we no
 			// longer need to listen for frame updates and do that work ourselves.
 			anim = getObjectAnimator();
-			anim.setRepeatCount(16);
+			anim.setRepeatCount(4);
 			anim.setRepeatMode(ValueAnimator.REVERSE);
 			anim.setInterpolator(new AccelerateInterpolator());
 			anim.start();
