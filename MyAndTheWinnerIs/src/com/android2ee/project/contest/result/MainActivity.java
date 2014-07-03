@@ -35,17 +35,31 @@ public class MainActivity extends Activity {
 	/******************************************************************************************/
 
 	/**
-	 * La liste des participants au concours
+	 * La liste des participants au concours 2013
+	 * 
+	 * { "Vincent M.", "Franck J.", "Ludovic B.", "Joseph K.", "Elisabeth D.",
+	 * "Eric T.", "Stephane Lo.", "Alain D.", "Mehdi C.", "Philippe L.", "Julien Q.", "Fabien F.", "Sahin E.",
+	 * "Stephane La.", "Setan L.", "Bertrand L.J.", "Thierry D.", "Paul L.", "Marc D.", "JeanLouis D.",
+	 * "Veronique C.", "Julien V.", "Denis B" }
+	 * 
+	 * Liste des participants 2014
 	 */
-	private final String[] participants = { "Vincent M.", "Franck J.", "Ludovic B.", "Joseph K.", "Elisabeth D.",
-			"Eric T.", "Stephane Lo.", "Alain D.", "Mehdi C.", "Philippe L.", "Julien Q.", "Fabien F.", "Sahin E.",
-			"Stephane La.", "Setan L.", "Bertrand L.J.", "Thierry D.", "Paul L.", "Marc D.", "JeanLouis D.",
-			"Veronique C.", "Julien V.", "Denis B" };
+	private final String[] participants = { "Tomas C.", "David L.B.", "Michael Ignaz ", "Nicolas L", "Romain J",
+			"Rodolphe C", "Christophe C", "Jerome H", "Erwan L", "Christophe L", "Cyril L", "Olivier P", "Stephanie P",
+			"Pascal R", "Patrick S", "Yann L", "Pierre M", "Mickael D", "Laurent", "Jamel", "antoine", "paul",
+			"Olivier A", "Emmanuel", "Sébastien R", "Patrice", "Sébastien B", "Pierre B", "Thierry", "Gilles",
+			"Quentin", "Vincent", "dave", "vincent", "Samit", "Julien", "Damien", "Hugo", "Nicolas G", "David Z",
+			"Rémy P", "Yannick", "Antonio C", "Christophe D", "Francois F", "Nicolas L", "Céline R.", "Stéphane S",
+			"Julien S", "Nicolas V", "Francois V", "Julien VL", "Caroline P.", "Patrick B.", "Sylvain", "Thibaud",
+			"Anthony M.", "Christophe L.V.", "Stephane N", "Thomas C", "Jean L.", "Luis L.", "Olivier G.",
+			"Amandine B.", "Bertrand L." };
 	/**
 	 * La liste des appareils participants au concours
 	 */
-	private final int[] devices = { R.drawable.nexus4, R.drawable.nexus7, R.drawable.nexus10 };
-	private final int[] devicesFound = { R.drawable.nexus4_win, R.drawable.nexus7_win, R.drawable.nexus10_win };
+	private final int[] devices = { R.drawable.nexus4, R.drawable.nexus7, R.drawable.nexus10, R.drawable.lg_gwatch,
+			R.drawable.samsung_gear_life };
+	private final int[] devicesFound = { R.drawable.nexus4_win, R.drawable.nexus7_win, R.drawable.nexus10_win,
+			R.drawable.lg_gwatch_win, R.drawable.samsung_gear_life_win };
 
 	/**
 	 * La clef pour le sharedPreference du gagnant
@@ -78,6 +92,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Log.e(""," NOmbre de participants : "+participants.length+" et nombre de devices "+devices.length);
 		try {
 			testMathFormula();
 		} catch (InvalidAlgorithmParameterException e) {
@@ -134,13 +149,19 @@ public class MainActivity extends Activity {
 	 */
 	private void initializeNexusDrawable() {
 		final AnimationDrawable animationDrawable = new AnimationDrawable();
-		Drawable nexus4 = getResources().getDrawable(devices[0]);
-		Drawable nexus7 = getResources().getDrawable(devices[1]);
-		Drawable nexus10 = getResources().getDrawable(devices[2]);
-		animationDrawable.addFrame(nexus4, deviceAnimDuration);
-		animationDrawable.addFrame(nexus7, deviceAnimDuration);
-		animationDrawable.addFrame(nexus10, deviceAnimDuration);
+//		Drawable nexus4 = getResources().getDrawable(devices[0]);
+//		Drawable nexus7 = getResources().getDrawable(devices[1]);
+//		Drawable nexus10 = getResources().getDrawable(devices[2]);
+//		animationDrawable.addFrame(nexus4, deviceAnimDuration);
+//		animationDrawable.addFrame(nexus7, deviceAnimDuration);
+//		animationDrawable.addFrame(nexus10, deviceAnimDuration);
+		int l = devices.length;
+		for (int i = 0; i < devices.length; i++) {
+			animationDrawable.addFrame(getResources().getDrawable(devices[i]), deviceAnimDuration);
+		}
+
 		animationDrawable.setExitFadeDuration(500);
+
 		// Run until we say stop
 		animationDrawable.setOneShot(false);
 		imvDevice.setImageDrawable(animationDrawable);
@@ -153,9 +174,10 @@ public class MainActivity extends Activity {
 	 */
 	private void initializeParticipantsDrawable() {
 		final AnimationDrawable animationDrawable = new AnimationDrawable();
-		int l=participants.length;
+		int l = participants.length;
 		for (int i = 0; i < participants.length; i++) {
-			animationDrawable.addFrame(createDrawableForParticipants((int)(Math.random()*l),false), participantsAnimDuration);
+			animationDrawable.addFrame(createDrawableForParticipants((int) (Math.random() * l), false),
+					participantsAnimDuration);
 		}
 		// Run until we say stop
 		animationDrawable.setOneShot(false);
@@ -182,7 +204,7 @@ public class MainActivity extends Activity {
 			paint.setTextAlign(Align.CENTER);
 		}
 		canvas.drawText(participants[participantNumber], 350, 80, paint);
-		if(withCheck) {
+		if (withCheck) {
 			canvas.drawBitmap(checkIcon, 500, 0, paint);
 		}
 		return new BitmapDrawable(getResources(), bitmap);
@@ -201,7 +223,7 @@ public class MainActivity extends Activity {
 				// Manage your thread's life cycle using the AtomicBooleans
 				while (count < loopsNumber[0]) {
 					// Make a pause or something like that
-					Thread.sleep(deviceAnimDuration*6);
+					Thread.sleep(deviceAnimDuration * 6);
 					// increment the counter
 					count++;
 					publishProgress(count);
@@ -239,14 +261,14 @@ public class MainActivity extends Activity {
 	 * 
 	 */
 	private void showFinalResult() {
-//		int winnerIs = 5;
-//		int deviceIs = 2;
+		// int winnerIs = 5;
+		// int deviceIs = 2;
 		// find the result
-		 int winnerIs=findTheWinner();
-		 int deviceIs=findTheDevice();
+		int winnerIs = findTheWinner();
+		int deviceIs = findTheDevice();
 		// display the device, display the participants
 		imvDevice.setImageDrawable(getResources().getDrawable(devicesFound[deviceIs]));
-		imvParticipants.setImageDrawable(createDrawableForParticipants(winnerIs,true));
+		imvParticipants.setImageDrawable(createDrawableForParticipants(winnerIs, true));
 		// displays the congrats
 		findViewById(R.id.lilFelicitation).setVisibility(View.VISIBLE);
 	}
@@ -294,7 +316,7 @@ public class MainActivity extends Activity {
 			// SO if devices={"A","B"} then 0<=Math.rand*d.length<2
 			// meaning math.rand*d.size=0,... or 1,...
 			double rand = Math.random() * devices.length;
-			Log.e(tag, "devices found : "+rand+" (devices.lenght = "+ devices.length);
+			Log.e(tag, "devices found : " + rand + " (devices.lenght = " + devices.length);
 			// So we just need the integer part
 			device = formula(rand);
 			// And storeIt

@@ -9,49 +9,55 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:gravity="center_horizontal" >
 
-        <TextView
-            style="@style/styleTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/btn_start_draw"
-            style="@style/styleBtn"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/button"
-            android:text="@string/btn_start_draw" />
+            <TextView
+                style="@style/styleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hello_world" />
 
-        <TextView
-            style="@style/styleTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/the_device_is" />
+            <Button
+                android:id="@+id/btn_start_draw"
+                style="@style/styleBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/button"
+                android:text="@string/btn_start_draw" />
 
-        <ImageView
-            android:id="@+id/imv_device"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                style="@style/styleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/the_device_is" />
 
-        <TextView
-            style="@style/styleTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/the_winner_is" />
+            <ImageView
+                android:id="@+id/imv_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/imv_participants"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <TextView
+                style="@style/styleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/the_winner_is" />
+
+            <ImageView
+                android:id="@+id/imv_participants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/lilFelicitation"
